@@ -1,18 +1,15 @@
-import time
-start_time = time.time()
 
 
-def subs(ssss, tam):
+def subs(ssss):
     sretorno = 0
     vretorno = 0
     a = 0
     vacales = ["A", "E", "I", "O", "U"]
-
-    while a+tam-1 < len(ssss):
+    while a < len(ssss):
         if ssss[a] in vacales:
-            vretorno = vretorno+1
+            vretorno = vretorno+len(ssss)-a
         else:
-            sretorno = sretorno+1
+            sretorno = sretorno+len(ssss)-a
 
         a += 1
 
@@ -22,20 +19,15 @@ def subs(ssss, tam):
 def minion_game(string):
     kkevin = 0
     sstuart = 0
-    ds = 1
-    while ds <= len(string):
-        s, k = subs(string, ds)
-        sstuart = sstuart+s
-        kkevin += k
-        ds += 1
+    s, k = subs(string)
+    sstuart = sstuart+s
+    kkevin += k
     if kkevin > sstuart:
         print("Kevin "+str(kkevin))
     elif kkevin == sstuart:
         print("Draw")
     elif kkevin < sstuart:
         print("Stuart "+str(sstuart))
-
-    # your code goes here
 
 
 if __name__ == '__main__':
