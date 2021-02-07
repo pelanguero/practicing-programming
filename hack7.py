@@ -1,58 +1,33 @@
-def subs(ssss, tam, vocall):
-    retorno = []
+import time
+start_time = time.time()
+
+
+def subs(ssss, tam):
+    sretorno = 0
+    vretorno = 0
     a = 0
     vacales = ["A", "E", "I", "O", "U"]
-    if vocall:
-        while a+tam-1 < len(ssss):
-            if ssss[a] in vacales:
-                retorno.append(ssss[a:a+tam])
-            a += 1
-    else:
-        while a+tam-1 < len(ssss):
-            if ssss[a] in vacales:
-                a = a-1
-                a += 1
-            else:
-                retorno.append(ssss[a:a+tam])
 
-            a += 1
+    while a+tam-1 < len(ssss):
+        if ssss[a] in vacales:
+            vretorno = vretorno+1
+        else:
+            sretorno = sretorno+1
 
-    return retorno
+        a += 1
 
-
-def puntaje(arrey):
-    retturn = 0
-    temp = []
-    for fg in arrey:
-        if fg not in temp:
-            temp.append(fg)
-            da = arrey.count(fg)
-            retturn = retturn+da
-
-    return retturn
-
-
-def kevin(ss):
-    rretorno = 0
-    ds = 1
-    while ds <= len(ss):
-        rretorno += puntaje(subs(ss, ds, True))
-        ds += 1
-    return rretorno
-
-
-def stuart(sss):
-    rretorno = 0
-    ds = 1
-    while ds <= len(sss):
-        rretorno += puntaje(subs(sss, ds, False))
-        ds += 1
-    return rretorno
+    return sretorno, vretorno
 
 
 def minion_game(string):
-    kkevin = kevin(string)
-    sstuart = stuart(string)
+    kkevin = 0
+    sstuart = 0
+    ds = 1
+    while ds <= len(string):
+        s, k = subs(string, ds)
+        sstuart = sstuart+s
+        kkevin += k
+        ds += 1
     if kkevin > sstuart:
         print("Kevin "+str(kkevin))
     elif kkevin == sstuart:
@@ -64,5 +39,8 @@ def minion_game(string):
 
 
 if __name__ == '__main__':
-    s = input()
+    fille = open("testhc7.txt", "r")
+    s = fille.readline()
     minion_game(s)
+    print((time.time() - start_time))
+    fille.close()
